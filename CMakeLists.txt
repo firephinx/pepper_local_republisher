@@ -135,8 +135,10 @@ include_directories( include
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
 # add_executable(${PROJECT_NAME}_node src/rcah18_pepper_vision_node.cpp)
-add_executable(image_republisher_node src/image_republisher_node.cpp src/image_republisher.cpp)
 add_executable(camera_info_republisher_node src/camera_info_republisher_node.cpp src/camera_info_republisher.cpp)
+add_executable(image_republisher_node src/image_republisher_node.cpp src/image_republisher.cpp)
+add_executable(laser_scan_republisher_node src/laser_scan_republisher_node.cpp src/laser_scan_republisher.cpp)
+
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
@@ -147,18 +149,22 @@ add_executable(camera_info_republisher_node src/camera_info_republisher_node.cpp
 ## Add cmake target dependencies of the executable
 ## same as for the library above
 # add_dependencies(${PROJECT_NAME}_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
-add_dependencies(image_republisher_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 add_dependencies(camera_info_republisher_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+add_dependencies(image_republisher_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+add_dependencies(laser_scan_republisher_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 ## Specify libraries to link a library or executable target against
 # target_link_libraries(${PROJECT_NAME}_node
 #   ${catkin_LIBRARIES}
 #   ${OpenCV_LIBS}
 # )
+target_link_libraries(camera_info_republisher_node
+  ${catkin_LIBRARIES}
+)
 target_link_libraries(image_republisher_node
   ${catkin_LIBRARIES}
 )
-target_link_libraries(camera_info_republisher_node
+target_link_libraries(laser_scan_republisher_node
   ${catkin_LIBRARIES}
 )
 
