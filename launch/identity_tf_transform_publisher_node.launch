@@ -2,8 +2,8 @@
 
   <node pkg="pepper_local_republisher" type="identity_tf_transform_publisher_node" name="identity_tf_transform_publisher_node" output="screen">
     <param name="publish_frequency"             value="10" />
-    <param name="tf_transform_parent_frame_id"  value="base_footprint" />
-    <param name="tf_transform_child_frame_id"   value="/pepper_local_republisher/base_footprint" />
+    <param name="tf_transform_parent_frame_id"  value="odom" />
+    <param name="tf_transform_child_frame_id"   value="pepper_local_republisher/base_link" />
   </node>
 
 </launch>
