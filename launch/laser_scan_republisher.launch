@@ -1,8 +1,9 @@
 <launch>
  
   <node pkg="pepper_local_republisher" type="laser_scan_republisher_node" name="pepper_laser_scan_republisher_node" output="screen">
-    <param name="input_laser_scan_topic_name"   value="/pepper_robot/laser" />
-    <param name="output_laser_scan_topic_name"  value="/pepper_local_republisher/pepper_robot/laser" />
+    <param name="input_laser_scan_topic_name"   	value="/pepper_robot/laser" />
+    <param name="output_laser_scan_topic_name"  	value="/pepper_local_republisher/pepper_robot/laser" />
+    <param name="output_laser_scan_frame_id_name"	value="/pepper_local_republisher/base_footprint" />
   </node>
 
 </launch>

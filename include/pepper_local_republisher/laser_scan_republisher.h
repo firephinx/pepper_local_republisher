@@ -11,6 +11,8 @@ class LaserScanRepublisher
 
         ros::Subscriber laser_scan_subscriber_;
         ros::Publisher laser_scan_publisher_;
+        std::string output_laser_scan_frame_id_name_;
+        bool change_frame_id_;
 
         void laserScanCallback(const sensor_msgs::LaserScan::ConstPtr& laser_scan);
 

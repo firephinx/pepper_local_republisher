@@ -5,7 +5,7 @@
     <param name="static_camera_info"                value="true" />
     <param name="input_camera_info_topic_name"      value="/pepper_robot/camera/front/camera_info" />
     <param name="output_camera_info_topic_name"     value="/pepper_local_republisher/pepper_robot/camera/front/camera_info" />
-    <param name="output_camera_info_frame_id_name"  value="/CameraTop_optical_frame_republished" />
+    <param name="output_camera_info_frame_id_name"  value="CameraTop_optical_frame_republished" />
   </node>
 
   <node pkg="pepper_local_republisher" type="camera_info_republisher_node" name="pepper_depth_camera_info_republisher_node" output="screen">
@@ -13,7 +13,7 @@
     <param name="static_camera_info"                value="true" />
     <param name="input_camera_info_topic_name"      value="/pepper_robot/camera/depth/camera_info" />
     <param name="output_camera_info_topic_name"     value="/pepper_local_republisher/pepper_robot/camera/depth/camera_info" />
-    <param name="output_camera_info_frame_id_name"  value="/CameraDepth_optical_frame_republished" />
+    <param name="output_camera_info_frame_id_name"  value="CameraDepth_optical_frame_republished" />
   </node>
 
 </launch>
