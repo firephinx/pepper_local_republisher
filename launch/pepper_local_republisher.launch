@@ -1,12 +1,24 @@
 <launch>
 
+  <node pkg="pepper_local_republisher" type="identity_tf_transform_publisher_node" name="identity_tf_transform_publisher_node" output="screen">
+    <param name="publish_frequency"             value="10" />
+    <param name="tf_transform_parent_frame_id"  value="base_footprint" />
+    <param name="tf_transform_child_frame_id"   value="/pepper_local_republisher/base_footprint" />
+  </node>
+
+  <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher_node" output="screen">
+    <param name="robot_description" value="$(find naoqi_driver)/share/urdf/pepper.urdf" />
+    <param name="tf_prefix"         value="/pepper_local_republisher" />
+    <param name="publish_frequency" value="50" />
+  </node>
+
   <node pkg="pepper_local_republisher" type="tf_transform_republisher_node" name="tf_transform_republisher_node" output="screen">
     <param name="publish_frequency"                   value="10" />
     <param name="static_tf_transform"                 value="true" />
-    <param name="input_tf_transform_parent_frame_id"  value="/CameraTop_optical_frame" />
-    <param name="input_tf_transform_child_frame_id"   value="/CameraDepth_optical_frame" />
-    <param name="output_tf_transform_parent_frame_id" value="/CameraTop_optical_frame_republished" />
-    <param name="output_tf_transform_child_frame_id"  value="/CameraDepth_optical_frame_republished" />
+    <param name="input_tf_transform_parent_frame_id"  value="/pepper_local_republisher/CameraTop_optical_frame" />
+    <param name="input_tf_transform_child_frame_id"   value="/pepper_local_republisher/CameraDepth_optical_frame" />
+    <param name="output_tf_transform_parent_frame_id" value="CameraTop_optical_frame_republished" />
+    <param name="output_tf_transform_child_frame_id"  value="CameraDepth_optical_frame_republished" />
   </node>
 
   <node pkg="pepper_local_republisher" type="camera_info_republisher_node" name="pepper_front_camera_info_republisher_node" output="screen">
@@ -14,7 +26,7 @@
     <param name="static_camera_info"                value="true" />
     <param name="input_camera_info_topic_name"      value="/pepper_robot/camera/front/camera_info" />
     <param name="output_camera_info_topic_name"     value="/pepper_local_republisher/pepper_robot/camera/front/camera_info" />
-    <param name="output_camera_info_frame_id_name"  value="/CameraTop_optical_frame_republished" />
+    <param name="output_camera_info_frame_id_name"  value="CameraTop_optical_frame_republished" />
   </node>
 
   <node pkg="pepper_local_republisher" type="camera_info_republisher_node" name="pepper_depth_camera_info_republisher_node" output="screen">
@@ -22,21 +34,21 @@
     <param name="static_camera_info"                value="true" />
     <param name="input_camera_info_topic_name"      value="/pepper_robot/camera/depth/camera_info" />
     <param name="output_camera_info_topic_name"     value="/pepper_local_republisher/pepper_robot/camera/depth/camera_info" />
-    <param name="output_camera_info_frame_id_name"  value="/CameraDepth_optical_frame_republished" />
+    <param name="output_camera_info_frame_id_name"  value="CameraDepth_optical_frame_republished" />
   </node>
 
   <node pkg="pepper_local_republisher" type="image_republisher_node" name="pepper_front_camera_republisher_node" output="screen">
     <param name="input_image_topic_name"    	value="/pepper_robot/camera/front/image_rect_color" />
     <param name="input_image_transport_type" 	value="compressed" />
     <param name="output_image_topic_name"   	value="/pepper_local_republisher/pepper_robot/camera/front/image_rect_color" />
-    <param name="output_image_frame_id_name"	value="/CameraTop_optical_frame_republished" />
+    <param name="output_image_frame_id_name"	value="CameraTop_optical_frame_republished" />
   </node>
 
   <node pkg="pepper_local_republisher" type="image_republisher_node" name="pepper_depth_camera_republisher_node" output="screen">
     <param name="input_image_topic_name"      value="/pepper_robot/camera/depth/image_rect" />
     <param name="input_image_transport_type" 	value="compressedDepth" />
     <param name="output_image_topic_name"     value="/pepper_local_republisher/pepper_robot/camera/depth/image_rect" />
-    <param name="output_image_frame_id_name"	value="/CameraDepth_optical_frame_republished" />
+    <param name="output_image_frame_id_name"	value="CameraDepth_optical_frame_republished" />
   </node>
 
   <node pkg="pepper_local_republisher" type="laser_scan_republisher_node" name="pepper_laser_scan_republisher_node" output="screen">
@@ -44,8 +56,10 @@
     <param name="output_laser_scan_topic_name"  value="/pepper_local_republisher/pepper_robot/laser" />
   </node>
 
+  <node pkg="nodelet" type="nodelet" args="manager" name="depth_image_proc_nodelet_manager" output="screen"/>
+
   <!-- Register depth image -->
-  <node pkg="nodelet" type="nodelet" name="register_depth_image" args="standalone depth_image_proc/register">
+  <node pkg="nodelet" type="nodelet" name="register_depth_image" args="load depth_image_proc/register depth_image_proc_nodelet_manager --no-bond">
 
     <remap from="rgb/camera_info" to="/pepper_local_republisher/pepper_robot/camera/front/camera_info"/>
     <remap from="depth/camera_info" to="/pepper_local_republisher/pepper_robot/camera/depth/camera_info"/>
@@ -59,7 +73,7 @@
   </node>
 
   <!-- Convert to point cloud -->
-  <node pkg="nodelet" type="nodelet" name="pointcloud_publisher" args="standalone depth_image_proc/point_cloud_xyzrgb">
+  <node pkg="nodelet" type="nodelet" name="pointcloud_publisher" args="load depth_image_proc/point_cloud_xyzrgb depth_image_proc_nodelet_manager --no-bond">
 
     <param name="queue_size" value="10"/>
 

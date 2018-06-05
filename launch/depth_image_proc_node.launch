@@ -1,0 +1,34 @@
+<launch>
+
+  <node pkg="nodelet" type="nodelet" args="manager" name="depth_image_proc_nodelet_manager" output="screen"/>
+
+  <!-- Register depth image -->
+  <node pkg="nodelet" type="nodelet" name="register_depth_image" args="load depth_image_proc/register depth_image_proc_nodelet_manager --no-bond">
+
+    <remap from="rgb/camera_info" to="/pepper_local_republisher/pepper_robot/camera/front/camera_info"/>
+    <remap from="depth/camera_info" to="/pepper_local_republisher/pepper_robot/camera/depth/camera_info"/>
+    <remap from="depth/image_rect" to="/pepper_local_republisher/pepper_robot/camera/depth/image_rect"/>
+
+    <remap from="depth_registered/camera_info" to="/pepper_local_republisher/pepper_robot/camera/depth_registered/sw_registered/camera_info"/>
+    <remap from="depth_registered/image_rect" to="/pepper_local_republisher/pepper_robot/camera/depth_registered/sw_registered/image_rect"/>
+
+    <param name="queue_size" value="10"/>
+
+  </node>
+
+  <!-- Convert to point cloud -->
+  <node pkg="nodelet" type="nodelet" name="pointcloud_publisher" args="load depth_image_proc/point_cloud_xyzrgb depth_image_proc_nodelet_manager --no-bond">
+
+    <param name="queue_size" value="10"/>
+
+    <!-- Input: Rectified depth image, registered to the RGB camera. -->
+    <remap from="depth_registered/image_rect" to="/pepper_local_republisher/pepper_robot/camera/depth_registered/sw_registered/image_rect"/> 
+    <!-- Input: Rectified color image. -->
+    <remap from="rgb/image_rect_color" to="/pepper_local_republisher/pepper_robot/camera/front/image_rect_color"/> 
+    <!-- Input: Camera calibration and metadata. --> 
+    <remap from="rgb/camera_info" to="/pepper_local_republisher/pepper_robot/camera/front/camera_info"/>
+    <!-- Output: XYZRGB point cloud. -->
+    <remap from="depth_registered/points" to="/pepper_local_republisher/pepper_robot/camera/depth_registered/points"/>
+  </node>
+
+</launch>
