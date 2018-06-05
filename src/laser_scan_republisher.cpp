@@ -7,7 +7,7 @@ LaserScanRepublisher::LaserScanRepublisher() : nh_("~")
 
     nh_.param("input_laser_scan_topic_name", input_laser_scan_topic_name, std::string("/scan"));
     nh_.param("output_laser_scan_topic_name", output_laser_scan_topic_name, std::string("/laser_scan_republisher/scan"));
-    nh_.param("output_image_frame_id_name", output_laser_scan_frame_id_name_, std::string(""));
+    nh_.param("output_laser_scan_frame_id_name", output_laser_scan_frame_id_name_, std::string(""));
 
     if(output_laser_scan_frame_id_name_.empty())
     {
