@@ -36,6 +36,7 @@ void ImageRepublisher::republishImage(const sensor_msgs::ImageConstPtr& image_co
 
     // Change the frame_id of the message to the custom frame_id
     image_ptr_msg->header.frame_id = output_image_frame_id_name_;
+    
     image_ptr_msg->height = image_const_ptr_msg->height;
     image_ptr_msg->width = image_const_ptr_msg->width;
     image_ptr_msg->encoding = image_const_ptr_msg->encoding;

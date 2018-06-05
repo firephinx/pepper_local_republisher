@@ -1,16 +1,16 @@
 <launch>
 
-  <node pkg="pepper_local_republisher" type="image_republisher_node" name="pepper_rgb_republisher_node" output="screen">
+  <node pkg="pepper_local_republisher" type="image_republisher_node" name="pepper_front_camera_republisher_node" output="screen">
     <param name="input_image_topic_name"    	value="/pepper_robot/camera/front/image_rect_color" />
     <param name="input_image_transport_type" 	value="compressed" />
     <param name="output_image_topic_name"   	value="/pepper_local_republisher/pepper_robot/camera/front/image_rect_color" />
     <param name="output_image_frame_id_name"	value="/CameraTop_optical_frame_republished" />
   </node>
 
-  <node pkg="pepper_local_republisher" type="image_republisher_node" name="pepper_depth_republisher_node" output="screen">
-    <param name="input_image_topic_name"    value="/pepper_robot/camera/depth/image_rect" />
+  <node pkg="pepper_local_republisher" type="image_republisher_node" name="pepper_depth_camera_republisher_node" output="screen">
+    <param name="input_image_topic_name"      value="/pepper_robot/camera/depth/image_rect" />
     <param name="input_image_transport_type" 	value="compressedDepth" />
-    <param name="output_image_topic_name"   value="/pepper_local_republisher/pepper_robot/camera/depth/image_rect" />
+    <param name="output_image_topic_name"     value="/pepper_local_republisher/pepper_robot/camera/depth/image_rect" />
     <param name="output_image_frame_id_name"	value="/CameraDepth_optical_frame_republished" />
   </node>
 
