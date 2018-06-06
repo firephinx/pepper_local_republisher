@@ -84,14 +84,14 @@
     <remap from="depth_registered/camera_info" to="/pepper_local_republisher/pepper_robot/camera/depth_registered/sw_registered/camera_info"/>
     <remap from="depth_registered/image_rect" to="/pepper_local_republisher/pepper_robot/camera/depth_registered/sw_registered/image_rect"/>
 
-    <param name="queue_size" value="10"/>
+    <param name="queue_size" value="30"/>
 
   </node>
 
   <!-- Convert to point cloud -->
   <node pkg="nodelet" type="nodelet" name="pointcloud_publisher" args="load depth_image_proc/point_cloud_xyzrgb depth_image_proc_nodelet_manager --no-bond">
 
-    <param name="queue_size" value="10"/>
+    <param name="queue_size" value="30"/>
 
     <!-- Input: Rectified depth image, registered to the RGB camera. -->
     <remap from="depth_registered/image_rect" to="/pepper_local_republisher/pepper_robot/camera/depth_registered/sw_registered/image_rect"/> 
