@@ -12,9 +12,6 @@ class TFTransformRepublisher
         tf::TransformBroadcaster tb_;
         tf::TransformListener tl_;
 
-        tf::Transform transform_;
-        tf::Transform identity_transform_;
-
     public:
         TFTransformRepublisher();
         ~TFTransformRepublisher(){}
