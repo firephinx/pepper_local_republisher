@@ -10,13 +10,23 @@
     <param name="output_tf_transform_child_frame_id"  value="pepper_local_republisher/CameraDepth_optical_frame_republished" />
   </node>
 
-  <node pkg="pepper_local_republisher" type="tf_transform_republisher_node" name="base_link_tf_transform_republisher_node" output="screen">
-    <param name="publish_frequency"                   value="10" />
+  <node pkg="pepper_local_republisher" type="tf_transform_republisher_node" name="base_footprint_tf_transform_republisher_node" output="screen">
+    <param name="publish_frequency"                   value="50" />
     <param name="static_tf_transform"                 value="false" />
-    <param name="same_parent_frame"                   value="true" />
+    <param name="same_parent_frame"                   value="false" />
+    <param name="input_tf_transform_parent_frame_id"  value="pepper_local_republisher/base_footprint" />
+    <param name="input_tf_transform_child_frame_id"   value="pepper_local_republisher/CameraTop_optical_frame" />
+    <param name="output_tf_transform_parent_frame_id" value="pepper_local_republisher/base_footprint_republished" />
+    <param name="output_tf_transform_child_frame_id"  value="pepper_local_republisher/CameraTop_optical_frame_republished" />
+  </node>
+
+  <node pkg="pepper_local_republisher" type="tf_transform_republisher_node" name="base_link_tf_transform_republisher_node" output="screen">
+    <param name="publish_frequency"                   value="50" />
+    <param name="static_tf_transform"                 value="false" />
+    <param name="same_parent_frame"                   value="false" />
     <param name="input_tf_transform_parent_frame_id"  value="odom" />
     <param name="input_tf_transform_child_frame_id"   value="base_link" />
-    <param name="output_tf_transform_parent_frame_id" value="odom" />
+    <param name="output_tf_transform_parent_frame_id" value="pepper_local_republisher/odom" />
     <param name="output_tf_transform_child_frame_id"  value="pepper_local_republisher/base_link" />
   </node>
 

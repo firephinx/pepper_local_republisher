@@ -17,7 +17,7 @@
   </node>
 
   <node pkg="pepper_local_republisher" type="tf_transform_republisher_node" name="base_footprint_tf_transform_republisher_node" output="screen">
-    <param name="publish_frequency"                   value="10" />
+    <param name="publish_frequency"                   value="50" />
     <param name="static_tf_transform"                 value="false" />
     <param name="same_parent_frame"                   value="false" />
     <param name="input_tf_transform_parent_frame_id"  value="pepper_local_republisher/base_footprint" />
@@ -27,7 +27,7 @@
   </node>
 
   <node pkg="pepper_local_republisher" type="tf_transform_republisher_node" name="base_link_tf_transform_republisher_node" output="screen">
-    <param name="publish_frequency"                   value="10" />
+    <param name="publish_frequency"                   value="50" />
     <param name="static_tf_transform"                 value="false" />
     <param name="same_parent_frame"                   value="false" />
     <param name="input_tf_transform_parent_frame_id"  value="odom" />
