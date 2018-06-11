@@ -9,8 +9,8 @@ PointCloudTransformer::PointCloudTransformer() : nh_("~")
     nh_.param("output_point_cloud_topic_name", output_point_cloud_topic_name, std::string("/point_cloud_transformer/point_cloud"));
     nh_.param("output_point_cloud_parent_frame_id", output_point_cloud_parent_frame_id_, std::string("/map"));
 
-    ros::Subscriber point_cloud_subscriber_ = nh_.subscribe(input_point_cloud_topic_name, 10, &PointCloudTransformer::pointCloudCallback, this);
-    ros::Publisher point_cloud_publisher_ = nh_.advertise<sensor_msgs::PointCloud2>(output_point_cloud_topic_name, 10);
+    point_cloud_subscriber_ = nh_.subscribe(input_point_cloud_topic_name, 10, &PointCloudTransformer::pointCloudCallback, this);
+    point_cloud_publisher_ = nh_.advertise<sensor_msgs::PointCloud2>(output_point_cloud_topic_name, 10);
 }
 
 void PointCloudTransformer::pointCloudCallback(const sensor_msgs::PointCloud2ConstPtr& point_cloud_const_ptr)
