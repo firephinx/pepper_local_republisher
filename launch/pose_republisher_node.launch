@@ -1,0 +1,9 @@
+<launch>
+
+  <node pkg="pepper_local_republisher" type="pose_republisher_node" name="amcl_pose_republisher_node" output="screen">
+    <param name="publish_frequency"    		value="50" />
+    <param name="input_pose_topic_name"     value="/amcl_pose" />
+    <param name="output_pose_topic_name"    value="/pepper_local_republisher/amcl_pose" />
+  </node>
+
+</launch>
