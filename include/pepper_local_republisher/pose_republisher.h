@@ -12,6 +12,7 @@ class PoseRepublisher
         ros::Subscriber pose_subscriber_;
         ros::Publisher pose_publisher_;
 
+        int header_seq_;
         bool pose_received_;
         geometry_msgs::PoseWithCovarianceStamped saved_pose_;
 

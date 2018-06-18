@@ -1,5 +1,6 @@
 <launch>
 
+  <!-- Transform point cloud to map coordinates -->
   <node pkg="pepper_local_republisher" type="point_cloud_transformer_node" name="point_cloud_transformer_node" output="screen">
     <param name="input_point_cloud_topic_name"        value="/pepper_local_republisher/pepper_robot/camera/depth_registered/points" />
     <param name="output_point_cloud_topic_name"       value="/pepper_local_republisher/pepper_robot/camera/depth_registered/transformed_points" />

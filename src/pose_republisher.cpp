@@ -1,6 +1,6 @@
 #include "pepper_local_republisher/pose_republisher.h"
 
-PoseRepublisher::PoseRepublisher() : nh_("~")
+PoseRepublisher::PoseRepublisher() : nh_("~"), header_seq_(0)
 {
     double publish_frequency;
     std::string input_pose_topic_name;
@@ -29,7 +29,10 @@ PoseRepublisher::PoseRepublisher() : nh_("~")
 
     while(nh_.ok())
     {
+        saved_pose_.header.seq = header_seq_;
+        saved_pose_.header.stamp = ros::Time::now();
         pose_publisher_.publish(saved_pose_);
+        header_seq_++;
     
         rate.sleep();
     }
