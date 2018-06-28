@@ -1,13 +1,13 @@
 <launch>
 
-  <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher_node" output="screen">
+  <!-- <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher_node" output="screen">
     <param name="robot_description" value="$(find naoqi_driver)/share/urdf/pepper.urdf" />
     <param name="tf_prefix"         value="/pepper_local_republisher" />
     <param name="publish_frequency" value="20" />
-  </node>
+  </node> -->
 
   <node pkg="pepper_local_republisher" type="identity_tf_transform_publisher_node" name="identity_tf_transform_publisher_node" output="screen">
-    <param name="publish_frequency"             value="10" />
+    <param name="publish_frequency"             value="30" />
     <param name="tf_transform_parent_frame_id"  value="CameraTop_optical_frame" />
     <param name="tf_transform_child_frame_id"   value="pepper_local_republisher/CameraTop_optical_frame_republished" />
   </node>
@@ -22,7 +22,7 @@
     <param name="output_tf_transform_child_frame_id"  value="/pepper_local_republisher/CameraDepth_optical_frame_republished" />
   </node> -->
 
-  <node pkg="pepper_local_republisher" type="tf_transform_republisher_node" name="base_footprint_tf_transform_republisher_node" output="screen">
+  <!-- <node pkg="pepper_local_republisher" type="tf_transform_republisher_node" name="base_footprint_tf_transform_republisher_node" output="screen">
     <param name="publish_frequency"                   value="33" />
     <param name="static_tf_transform"                 value="false" />
     <param name="same_parent_frame"                   value="false" />
@@ -30,9 +30,9 @@
     <param name="input_tf_transform_child_frame_id"   value="pepper_local_republisher/CameraTop_optical_frame" />
     <param name="output_tf_transform_parent_frame_id" value="pepper_local_republisher/base_footprint_republished" />
     <param name="output_tf_transform_child_frame_id"  value="pepper_local_republisher/CameraTop_optical_frame_republished" />
-  </node>
+  </node> -->
 
-  <node pkg="pepper_local_republisher" type="tf_transform_republisher_node" name="base_link_tf_transform_republisher_node" output="screen">
+  <!-- <node pkg="pepper_local_republisher" type="tf_transform_republisher_node" name="base_link_tf_transform_republisher_node" output="screen">
     <param name="publish_frequency"                   value="33" />
     <param name="static_tf_transform"                 value="false" />
     <param name="same_parent_frame"                   value="false" />
@@ -40,10 +40,10 @@
     <param name="input_tf_transform_child_frame_id"   value="base_link" />
     <param name="output_tf_transform_parent_frame_id" value="pepper_local_republisher/odom" />
     <param name="output_tf_transform_child_frame_id"  value="pepper_local_republisher/base_link" />
-  </node>
+  </node> -->
 
   <node pkg="pepper_local_republisher" type="camera_info_republisher_node" name="pepper_front_camera_info_republisher_node" output="screen">
-    <param name="publish_frequency"                 value="19" />
+    <param name="publish_frequency"                 value="10" />
     <param name="static_camera_info"                value="true" />
     <param name="input_camera_info_topic_name"      value="/pepper_robot/camera/front/camera_info" />
     <param name="output_camera_info_topic_name"     value="/pepper_local_republisher/pepper_robot/camera/front/camera_info" />
@@ -76,11 +76,11 @@
     <param name="output_image_frame_id_name"	value="pepper_local_republisher/CameraTop_optical_frame_republished" />
   </node>
 
-  <node pkg="pepper_local_republisher" type="laser_scan_republisher_node" name="pepper_laser_scan_republisher_node" output="screen">
+  <!-- <node pkg="pepper_local_republisher" type="laser_scan_republisher_node" name="pepper_laser_scan_republisher_node" output="screen">
     <param name="input_laser_scan_topic_name"     value="/pepper_robot/laser" />
     <param name="output_laser_scan_topic_name"    value="/pepper_local_republisher/pepper_robot/laser" />
     <param name="output_laser_scan_frame_id_name" value="pepper_local_republisher/base_footprint" />
-  </node>
+  </node> -->
 
   <!-- <node pkg="nodelet" type="nodelet" args="manager" name="depth_image_proc_nodelet_manager" output="screen"/> -->
 
